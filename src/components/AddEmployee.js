@@ -1,17 +1,49 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Modal from "./UI/Modal";
+import Input from "./UI/Input";
+import classes from "./AddEmp.css";
 // import "../assets/css/font-awesome.css";
 // import "../assets/css/bootstrap.css";
 // import "../assets/css/custom.css";
 
-const addEmployeeForm = (event) => {
-  event.preventDefault();
-  alert("Form Submitted");
-};
-
-export default function AddEmployee() {
+export default function AddEmployee(props) {
   return (
-    <>
+    <Modal>
+      <div>
+        <h4>Add New Employee</h4>
+        <hr />
+        <div className="form-cnt">
+          <Input
+            label="Employee Name"
+            ClassName="inputtext"
+            input={{
+              type: "text",
+            }}
+          />
+          <Input
+            label="Designation"
+            input={{
+              type: "text",
+            }}
+          />
+          <Input
+            label="Mobile Number"
+            input={{
+              type: "number",
+            }}
+          />
+        </div>
+      </div>
+      <button className="btn btn-success ">Add Employee</button>
+      &nbsp;&nbsp;&nbsp;
+      <button className="btn btn-danger " onClick={props.onHideCart}>
+        Cancel
+      </button>
+    </Modal>
+  );
+}
+{
+  /* <>
       <div id="page-wrapper">
         <div id="page-inner">
           <h4>Add New Employee</h4>
@@ -68,6 +100,5 @@ export default function AddEmployee() {
           </form>
         </div>
       </div>
-    </>
-  );
+    </> */
 }

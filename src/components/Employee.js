@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import AddEmployee from "./AddEmployee";
 // import "@blueprintjs/core/lib/css/blueprint.css";
 // import { Dialog, Classes } from "@blueprintjs/core";
 // import "../assets/css/font-awesome.css";
@@ -18,31 +18,24 @@ export default function Employee() {
 
   const [records, setRecords] = useState([]);
   // console.log(records);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const openHandler = () => {
+    setIsModalOpen(true);
+  };
+  const hideModalHandler = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
-      {/* <div
-        id="page-wrapper"
-        style={{
-          display: "block",
-          width: 400,
-          padding: 30,
-        }}
-      >
-        <h4>ReactJS Blueprint Dialog Component</h4>
-        <Dialog title="Dialog Title" icon="info-sign" isOpen={true}>
-          <div className={Classes.DIALOG_BODY}>
-            <p>Sample Dialog Content to display!</p>
-          </div>
-        </Dialog>
-      </div>  */}
+      {isModalOpen && <AddEmployee onHideCart={hideModalHandler} />}
       <div id="page-wrapper">
         <div id="page-inner">
           <div className="col-md-12" style={{ display: "flex" }}>
             <h4 style={{ width: "inherit" }}>Employee</h4>
-            <Link to="/add-emp">
-              <button className="btn btn-danger ">Add Employee</button>
-            </Link>
+            <button className="btn btn-danger " onClick={openHandler}>
+              Add Employee
+            </button>
           </div>
           <hr />
           <div className="table-responsive">
