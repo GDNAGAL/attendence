@@ -32,7 +32,7 @@ export default function Employee() {
       <div id="page-wrapper">
         <div id="page-inner">
           <div className="col-md-12" style={{ display: "flex" }}>
-            <h4 style={{ width: "inherit" }}>Employee</h4>
+            <h2 style={{ width: "inherit" }}>Employee</h2>
             <button className="btn btn-danger " onClick={openHandler}>
               Add Employee
             </button>

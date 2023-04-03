@@ -21,9 +21,9 @@ export default function Navbar() {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <a className="navbar-brand" href="index.html">
+          <Link className="navbar-brand" to="/">
             iWeb Wiser
-          </a>
+          </Link>
         </div>
         <div
           style={{
@@ -53,32 +53,32 @@ export default function Navbar() {
 
             <li>
               <Link to="/">
-                <i className="fa fa-dashboard fa-3x"></i> Dashboard
+                <i className="fa fa-dashboard fa-2x"></i> Dashboard
               </Link>
             </li>
             <li>
               <Link to="emp">
-                <i className="fa fa-users fa-3x"></i> Employees
+                <i className="fa fa-users fa-2x"></i> Employees
+              </Link>
+            </li>
+            <li>
+              <Link to="/attendence">
+                <i className="fa fa-edit fa-2x"></i> Attendence
               </Link>
             </li>
             <li>
               <Link to="/">
-                <i className="fa fa-qrcode fa-3x"></i> Tabs & Panels
+                <i className="fa fa-qrcode fa-2x"></i> Tabs & Panels
               </Link>
             </li>
             <li>
               <Link to="/">
-                <i className="fa fa-bar-chart-o fa-3x"></i> Morris Charts
+                <i className="fa fa-bar-chart-o fa-2x"></i> Morris Charts
               </Link>
             </li>
             <li>
               <Link to="/">
-                <i className="fa fa-table fa-3x"></i> Table Examples
-              </Link>
-            </li>
-            <li>
-              <Link to="/">
-                <i className="fa fa-edit fa-3x"></i> Forms{" "}
+                <i className="fa fa-table fa-2x"></i> Table Examples
               </Link>
             </li>
           </ul>
