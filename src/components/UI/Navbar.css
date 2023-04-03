@@ -105,6 +105,7 @@
 .navbar-side {
   border: none;
   background-color: #202020;
+  height: 92vh;
 }
 .navbar-cls-top {
   background: #4d4d4d;

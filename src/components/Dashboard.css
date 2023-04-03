@@ -17,9 +17,10 @@ button {
 #page-inner {
   width: 100%;
   margin: 3px 20px 10px 0px;
+  padding-bottom: 15px;
   background-color: #fff !important;
   padding: 20px;
-  height: 80vh;
+  height: 85vh;
   overflow-y: scroll;
 }
 
@@ -174,6 +175,7 @@ p {
 .chat-img > img {
   margin-left: 20px;
 }
+
 @media (min-width: 768px) {
   #page-wrapper {
     margin: 0 0 0 260px;
