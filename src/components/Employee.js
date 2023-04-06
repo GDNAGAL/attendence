@@ -10,13 +10,28 @@ import AddEmployee from "./AddEmployee";
 export default function Employee() {
   // get data from api
 
-  useEffect(() => {
-    fetch("https://64254d1b7ac292e3cffca04a.mockapi.io/emp/empdata")
-      .then((response) => response.json())
-      .then((data) => setRecords(data));
-  }, []);
+  async function apiResponse() {
+    const response = await fetch(
+      "https://attendancesys-40864-default-rtdb.firebaseio.com/empData.json"
+    );
+    const data = await response.json();
 
-  const [records, setRecords] = useState([]);
+    const loadEmpdata = [];
+    for (const key in data) {
+      loadEmpdata.push({
+        id: key,
+        Name: data[key].Name,
+        Designation: data[key].Designation,
+        Mobile: data[key].Mobile,
+      });
+    }
+
+    setLoadData(loadEmpdata);
+  }
+  useEffect(() => {
+    apiResponse();
+  }, []);
+  const [loadData, setLoadData] = useState([]);
   // console.log(records);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -51,13 +66,13 @@ export default function Employee() {
                 </tr>
               </thead>
               <tbody>
-                {records.map((list, index) => (
+                {loadData.map((list, index) => (
                   <tr key={index}>
                     <td className="text-center">{index + 1}</td>
                     <td className="text-center">{list.id}</td>
-                    <td>{list.name}</td>
-                    <td>{list.name}</td>
-                    <td className="text-center">{list.mobile}</td>
+                    <td>{list.Name}</td>
+                    <td>{list.Designation}</td>
+                    <td className="text-center">{list.Mobile}</td>
                     <td className="text-center"></td>
                   </tr>
                 ))}

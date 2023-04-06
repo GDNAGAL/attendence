@@ -1,44 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "./UI/Modal";
 import Input from "./UI/Input";
-import classes from "./AddEmp.css";
+import "./AddEmp.css";
+import { Form } from "react-router-dom";
 // import "../assets/css/font-awesome.css";
 // import "../assets/css/bootstrap.css";
 // import "../assets/css/custom.css";
 
 export default function AddEmployee(props) {
+  const [empName, setEmpName] = useState();
+  const [empDesignation, setEmpDesignation] = useState();
+  const [empMob, setEmpMob] = useState();
+
+  function submitHandler(event) {
+    event.preventDefault();
+    const empData = {
+      Name: empName,
+      Designation: empDesignation,
+      Mobile: empMob,
+    };
+    const addEmpHandler = async () => {
+      await fetch(
+        "https://attendancesys-40864-default-rtdb.firebaseio.com/empData.json",
+        {
+          method: "POST",
+          body: JSON.stringify(empData),
+        }
+      );
+    };
+    addEmpHandler();
+    props.onHideCart();
+    alert("Success");
+  }
+  const nameChangeHandler = (e) => setEmpName(e.target.value);
+  const designationChangeHandler = (e) => setEmpDesignation(e.target.value);
+  const mobileChangeHandler = (e) => setEmpMob(e.target.value);
   return (
     <Modal>
-      <div>
-        <h4>Add New Employee</h4>
-        <hr />
-        <div className="form-cnt">
-          <Input
-            label="Employee Name"
-            ClassName="inputtext"
-            input={{
-              type: "text",
-            }}
-          />
-          <Input
-            label="Designation"
-            input={{
-              type: "text",
-            }}
-          />
-          <Input
-            label="Mobile Number"
-            input={{
-              type: "number",
-            }}
-          />
+      <form onSubmit={submitHandler}>
+        <div>
+          <h4>Add New Employee</h4>
+          <hr />
+          <div className="form-cnt">
+            <Input
+              label="Employee Name"
+              onChangHandler={nameChangeHandler}
+              ClassName="inputtext"
+              input={{
+                type: "text",
+              }}
+            />
+            <Input
+              label="Designation"
+              onChangHandler={designationChangeHandler}
+              input={{
+                type: "text",
+              }}
+            />
+            <Input
+              label="Mobile Number"
+              onChangHandler={mobileChangeHandler}
+              input={{
+                type: "number",
+              }}
+            />
+          </div>
         </div>
-      </div>
-      <button className="btn btn-success ">Add Employee</button>
-      &nbsp;&nbsp;&nbsp;
-      <button className="btn btn-danger " onClick={props.onHideCart}>
-        Cancel
-      </button>
+        <button className="btn btn-success" type="submit">
+          Add Employee
+        </button>
+        &nbsp;&nbsp;&nbsp;
+        <button className="btn btn-danger " onClick={props.onHideCart}>
+          Cancel
+        </button>
+      </form>
     </Modal>
   );
 }
