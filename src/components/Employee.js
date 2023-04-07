@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import AddEmployee from "./AddEmployee";
+import AlertMsg from "./AlertMsg";
 // import "@blueprintjs/core/lib/css/blueprint.css";
 // import { Dialog, Classes } from "@blueprintjs/core";
 // import "../assets/css/font-awesome.css";
@@ -15,17 +16,15 @@ export default function Employee() {
       "https://attendancesys-40864-default-rtdb.firebaseio.com/empData.json"
     );
     const data = await response.json();
-
     const loadEmpdata = [];
     for (const key in data) {
       loadEmpdata.push({
         id: key,
-        Name: data[key].Name,
-        Designation: data[key].Designation,
-        Mobile: data[key].Mobile,
+        Name: data[key].empName,
+        Designation: data[key].empDesignation,
+        Mobile: data[key].empMob,
       });
     }
-
     setLoadData(loadEmpdata);
   }
   useEffect(() => {
@@ -34,16 +33,27 @@ export default function Employee() {
   const [loadData, setLoadData] = useState([]);
   // console.log(records);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
   const openHandler = () => {
     setIsModalOpen(true);
   };
   const hideModalHandler = () => {
     setIsModalOpen(false);
   };
+  const onOpenAlert = () => {
+    setIsAlertOpen(true);
+  };
+
+  setTimeout(() => {
+    setIsAlertOpen(false);
+  }, 2500);
+
   return (
     <>
-      {isModalOpen && <AddEmployee onHideCart={hideModalHandler} />}
+      {isModalOpen && (
+        <AddEmployee onHideCart={hideModalHandler} onOpenAlert={onOpenAlert} />
+      )}
+      {isAlertOpen && <AlertMsg />}
       <div id="page-wrapper">
         <div id="page-inner">
           <div className="col-md-12" style={{ display: "flex" }}>
